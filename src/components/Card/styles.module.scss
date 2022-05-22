@@ -1,0 +1,133 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 170px;
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  transition: all 0.5s;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+
+  &:nth-child(1) {
+    top: 2rem;
+    left: 0;
+  }
+
+  &:nth-child(2) {
+    top: 2rem;
+    left: calc(120px + 10px);
+  }
+
+  &:nth-child(3) {
+    top: 2rem;
+    left: calc(2 * 120px + 2 * 10px);
+  }
+
+  &:nth-child(4) {
+    top: 2rem;
+    left: calc(3 * 120px + 3 * 10px);
+  }
+
+  &:nth-child(5) {
+    top: calc(170px + 10px + 2rem);
+    left: 0;
+  }
+
+  &:nth-child(6) {
+    top: calc(170px + 10px + 2rem);
+    left: calc(120px + 10px);
+  }
+
+  &:nth-child(7) {
+    top: calc(170px + 10px + 2rem);
+    left: calc(2 * 120px + 2 * 10px);
+  }
+
+  &:nth-child(8) {
+    top: calc(170px + 10px + 2rem);
+    left: calc(3 * 120px + 3 * 10px);
+  }
+
+  &:nth-child(9) {
+    top: calc(2 * 170px + 2 * 10px + 2rem);
+    left: 0;
+  }
+
+  &:nth-child(10) {
+    top: calc(2 * 170px + 2 * 10px + 2rem);
+    left: calc(120px + 10px);
+  }
+
+  &:nth-child(11) {
+    top: calc(2 * 170px + 2 * 10px + 2rem);
+    left: calc(2 * 120px + 2 * 10px);
+  }
+
+  &:nth-child(12) {
+    top: calc(2 * 170px + 2 * 10px + 2rem);
+    left: calc(3 * 120px + 3 * 10px);
+  }
+
+  &:active {
+    transform: scale(0.97);
+
+    &.flip {
+      transform: rotateY(180deg) scale(0.97);
+    }
+  }
+
+  &:focus,
+  &:active {
+    outline: 1px solid rgb(130, 87, 230);
+    outline-offset: 0.25rem;
+  }
+
+  &[data-type='back'] {
+    background-color: #fad02c;
+  }
+
+  &[data-type='front'] {
+    background: #e9eaec;
+  }
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.shuffle {
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translate(-50%, -50%) !important;
+  top: 50% !important;
+  left: 50% !important;
+}
+
+// .shuffle {
+//   animation-name: shuffle;
+//   animation-duration: 1000ms;
+//   animation-iteration-count: infinite;
+//   animation-timing-function: ease;
+// }
+
+// @keyframes shuffle {
+//   0% {
+//     top: initial !important;
+//     left: initial !important;
+//   }
+//   20%,
+//   40% {
+//     transform: translate(-50%, -50%) !important;
+//     top: 50% !important;
+//     left: 50% !important;
+//   }
+//   100% {
+//     top: initial !important;
+//     left: initial !important;
+//   }
+// }

@@ -1,0 +1,15 @@
+.cardsContainer {
+  width: 90vw;
+  max-width: 520px;
+  min-height: calc(100vh - 4rem);
+  padding-top: 2rem;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 120px);
+  grid-template-rows: repeat(auto-fit, 170px);
+  gap: 10px;
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
