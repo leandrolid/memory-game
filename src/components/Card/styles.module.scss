@@ -11,7 +11,7 @@
   overflow: hidden;
   border: none;
   outline: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   position: absolute;
 
   &:nth-child(1) {
@@ -93,7 +93,7 @@
   }
 
   &[data-type='front'] {
-    background: #e9eaec;
+    background: #14172e;
   }
 }
 

@@ -3,7 +3,7 @@ import box from './img/card.png';
 import luigi from './img/luigi.png';
 import mario from './img/mario.png';
 import peach from './img/peach.png';
-import toad from './img/toad.png';
+import wario from './img/wario.png';
 import yoshi from './img/yoshi.png';
 
 const cards = [
@@ -33,8 +33,8 @@ const cards = [
   },
   {
     id: 5,
-    name: 'Toad',
-    front: toad,
+    name: 'Wario',
+    front: wario,
     back: box,
   },
   {
@@ -69,8 +69,8 @@ const cards = [
   },
   {
     id: 11,
-    name: 'Toad',
-    front: toad,
+    name: 'Wario',
+    front: wario,
     back: box,
   },
   {
