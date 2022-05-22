@@ -33,7 +33,7 @@ O app foi feito usando React com Vite, e também com uso do TypeScript.
 <br>
 
 <p align="center">
-<img src=".github/app_image.png" src="Imagem do aplicativo de feedback" />
+<img src=".github/memory-game-screenshot-2.png" src="Imagem do aplicativo de feedback" />
 </p>
 
 ## Tecnologias
