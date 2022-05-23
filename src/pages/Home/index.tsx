@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import cardsOrigin from '../../assets/cards';
 import { Card } from '../../components/Card';
@@ -26,17 +26,20 @@ export function Home() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo>({wins: 0, turns: 0});
   const [shouldResetGame, setShouldResetGame] = useState(true);
 
-  const sumTurnsNumber = () => {
-    setPlayerInfo((prevInfo) => ({ ...prevInfo, turns: prevInfo.turns + 1 }));
+  const sumTurnsNumber = (changedCards: ICard[]) => {
+    const selectedCards = changedCards.filter((card) => card.selected);
+    if (selectedCards.length === 2) {
+      setPlayerInfo((prevInfo) => ({ ...prevInfo, turns: prevInfo.turns + 1 }));
+    }
   };
   
-  const sumWinsNumber = () => {
-    const isFinished = cards.every((card) => card.match);
+  const sumWinsNumber = (changedCards: ICard[]) => {
+    const isFinished = changedCards.every((card) => card.match);
     if (isFinished) setPlayerInfo((prevInfo) => ({ ...prevInfo, wins: prevInfo.wins + 1 }));
   };
 
   const onResetGame = () => {
-    setCards((prevCards) => prevCards.map((card) => ({...card, match: false})));
+    setCards((prevCards) => prevCards.map((card) => ({...card, match: false, selected: false })));
     setTimeout(() => {
       setPlayerInfo((prevInfo) => ({ ...prevInfo, turns: 0 }));
       setShouldResetGame(true);
@@ -51,16 +54,17 @@ export function Home() {
     }
   }, [shouldResetGame]);
 
-  const setCardPair = (card: ICard) => {
-    setCards((prevCards) => {
-      const newCards = prevCards.map((prevCard) => {
-        if (prevCard.id === card.id) return ({ ...prevCard, selected: true });
-        return prevCard;
-      });
-
-      return newCards;
+  const setCardPair = useCallback((card: ICard) => {
+    const newCards = cards.map((prevCard) => {
+      if (prevCard.id === card.id) return ({ ...prevCard, selected: true });
+      return prevCard;
     });
-  };
+
+    sumTurnsNumber(newCards);
+    setCards(newCards);
+  }, [cards]);
+
+  useEffect(() => sumWinsNumber(cards), [cards]);
 
   useUpdateEffect(() => {
     const selectedCards = cards.filter((card) => card.selected);
@@ -68,8 +72,6 @@ export function Home() {
     if (selectedCards.length === 2) {
       const [cardOne, cardTwo] = selectedCards;
       console.log('verificando selecionadas');
-
-      sumTurnsNumber();
 
       if (cardOne?.name === cardTwo?.name) {
         setCards((prevCads) => {
@@ -81,13 +83,10 @@ export function Home() {
           return newCards;
         });
 
-        console.log('deu match');
-
-        sumWinsNumber();
-        
+        // console.log('deu match');
         setShouldResetSelectedCards(true);
       } else {
-        console.log('não deu match');
+        // console.log('não deu match');
         setShouldResetSelectedCards(true);
       }
     }
@@ -95,8 +94,7 @@ export function Home() {
   
   useEffect(() => {
     if (shouldResetSelectedCards) {
-      console.log('removendo seleção');
-      
+      // console.log('removendo seleção');
       const newCards = cards.map((card) => ({...card, selected: false}));
       setCards(newCards);
       setShouldResetSelectedCards(false);
