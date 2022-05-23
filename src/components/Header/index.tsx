@@ -46,7 +46,6 @@ export const Header = ({ playerInfo, onResetGame }: HeaderProps) => {
           <audio
             ref={audioRef}
             src={marioSong}
-            autoPlay
             loop
           />
           <button type="button" onClick={setStartAudio}>

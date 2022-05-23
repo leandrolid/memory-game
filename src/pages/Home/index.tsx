@@ -34,8 +34,12 @@ export function Home() {
   };
   
   const sumWinsNumber = (changedCards: ICard[]) => {
-    const isFinished = changedCards.every((card) => card.match);
-    if (isFinished) setPlayerInfo((prevInfo) => ({ ...prevInfo, wins: prevInfo.wins + 1 }));
+    const matchingCards = changedCards.filter((card) => card?.match);
+    const selectedCards = changedCards.filter((card) => card?.selected);
+
+    if (matchingCards.length === 10 && selectedCards.length === 2) {
+      setPlayerInfo((prevInfo) => ({ ...prevInfo, wins: prevInfo.wins + 1 }));
+    }
   };
 
   const onResetGame = () => {
@@ -61,18 +65,16 @@ export function Home() {
     });
 
     sumTurnsNumber(newCards);
+    sumWinsNumber(newCards);
     setCards(newCards);
   }, [cards]);
-
-  useEffect(() => sumWinsNumber(cards), [cards]);
 
   useUpdateEffect(() => {
     const selectedCards = cards.filter((card) => card.selected);
 
     if (selectedCards.length === 2) {
       const [cardOne, cardTwo] = selectedCards;
-      console.log('verificando selecionadas');
-
+      // console.log('verificando selecionadas');
       if (cardOne?.name === cardTwo?.name) {
         setCards((prevCads) => {
           const newCards = prevCads.map((card) => {
@@ -82,7 +84,6 @@ export function Home() {
 
           return newCards;
         });
-
         // console.log('deu match');
         setShouldResetSelectedCards(true);
       } else {
